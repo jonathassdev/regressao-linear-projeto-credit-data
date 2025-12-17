@@ -6,6 +6,22 @@ Este projeto tem como objetivo implementar um modelo de **Regressão Linear** ut
 
 O fluxo do trabalho no projeto abrange desde a preparação dos dados até a avaliação final do modelo, utilizando métricas como **MAE**, **MSE**, **RMSE** e **R²**.
 
+## Bases de Dados Utilizadas
+
+O projeto utiliza a base de dados **German Credit Data** da UCI Machine Learning Repository, que está disponível em:
+
+- **Base de dados**: [German Credit Data](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data)
+- **Descrição**: Este conjunto de dados contém informações sobre pessoas que fizeram pedidos de crédito e se o crédito foi aprovado ou não, baseando-se em características como idade, sexo, número de dependentes, entre outros.
+
+### Detalhes:
+
+- **Fonte**: Statlog (German Credit Data)
+- **Acessível em**: [UCI Dataset Link](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data)
+  
+### Objetivo:
+
+O objetivo da base de dados é prever se um cliente de um banco será bom ou ruim para um empréstimo com base em várias características.
+
 ## 1. Tratamento dos Dados
 
 ### Passo a passo:
@@ -39,7 +55,7 @@ A otimização dos hiperparâmetros foi realizada utilizando o **GridSearchCV**.
   - `n_estimators`: Número de árvores
   - `max_depth`: Profundidade máxima das árvores
   - `min_samples_split`: Mínimo número de amostras para dividir um nó
-  - `min_samples_leaf`: Mínimo número de amostras para ser uma folha
+  - `min_samples_leaf`: Mínimo número de amostras para ser folha
   
 **Resultado**:
 Os melhores hiperparâmetros encontrados foram exibidos para garantir que o modelo esteja configurado para o melhor desempenho possível.
