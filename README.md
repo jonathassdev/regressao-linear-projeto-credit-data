@@ -96,12 +96,12 @@ Esse formato facilita a manutenção do código e o entendimento das etapas do p
 
 ### Passos para execução:
 1. Clone este repositório no seu computador:
-    ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
-    ```
+   ```bash
+   git clone https://github.com/jonathassdev/regressao-linear-projeto-credit-data.git
+
 2. Navegue até o diretório do projeto:
     ```bash
-    cd nome-do-repositorio
+   cd regressao-linear-projeto-credit-data
     ```
 3. Crie e ative um ambiente virtual:
     ```bash
