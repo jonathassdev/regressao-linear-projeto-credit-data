@@ -1,127 +1,61 @@
-# Projeto de Regressão Linear com Validação Cruzada e Otimização de Hiperparâmetros
+# 📂 Projeto de Regressão: Previsão de Risco de Crédito
 
-## Descrição do Projeto
+Este repositório contém um projeto de Machine Learning focado na previsão de risco de crédito utilizando o dataset **German Credit Data**. O projeto implementa técnicas de regressão, validação cruzada robusta e otimização de hiperparâmetros para prever a viabilidade de empréstimos.
 
-Este projeto tem como objetivo implementar um modelo de **Regressão Linear** utilizando a **Validação Cruzada** e a **Otimização de Hiperparâmetros** com base em uma base de dados do **german credit dataset**. Durante o processo, o modelo será treinado, avaliado e ajustado para melhor performance.
+---
 
-O fluxo do trabalho no projeto abrange desde a preparação dos dados até a avaliação final do modelo, utilizando métricas como **MAE**, **MSE**, **RMSE** e **R²**.
+## 📝 Descrição do Projeto
 
-## Bases de Dados Utilizadas
+O objetivo principal é prever se um cliente de banco será classificado como "bom" ou "ruim" para a concessão de crédito. Embora o problema seja originalmente de classificação, este projeto explora a abordagem via **Regressão** (utilizando `RandomForestRegressor`) para analisar a probabilidade e a magnitude dos riscos associados a variáveis como idade, status financeiro e histórico de crédito.
 
-O projeto utiliza a base de dados **German Credit Data** da UCI Machine Learning Repository, que está disponível em:
+---
 
-- **Base de dados**: [German Credit Data](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data)
-- **Descrição**: Este conjunto de dados contém informações sobre pessoas que fizeram pedidos de crédito e se o crédito foi aprovado ou não, baseando-se em características como idade, sexo, número de dependentes, entre outros.
+## 🛠️ Tecnologias e Bibliotecas
 
-### Detalhes:
+O projeto foi desenvolvido em **Python 3.x** utilizando as seguintes bibliotecas:
 
-- **Fonte**: Statlog (German Credit Data)
-- **Acessível em**: [UCI Dataset Link](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data)
-  
-### Objetivo:
+* **Manipulação de Dados:** `pandas`, `numpy`
+* **Machine Learning:** `scikit-learn` (Random Forest, GridSearchCV, Cross-Validation)
+* **Balanceamento:** `imbalanced-learn` (SMOTE)
+* **Visualização:** `matplotlib`, `seaborn`
 
-O objetivo da base de dados é prever se um cliente de um banco será bom ou ruim para um empréstimo com base em várias características.
+---
 
-## 1. Tratamento dos Dados
+## 📊 Metodologia
 
-### Passo a passo:
+O desenvolvimento seguiu um pipeline rigoroso de Ciência de Dados:
 
-- **Carregamento e Preparação dos Dados**: O arquivo de dados `german.data` foi lido e convertido para formato numérico.
-- **Imputação de Dados Faltantes**: Para tratar dados faltantes, utilizou-se a estratégia de **imputação com o valor mais frequente** nas variáveis independentes e dependentes.
-- **Normalização dos Dados**: Utilizou-se o **StandardScaler** para normalizar os dados de treino e teste, melhorando a performance do modelo de regressão linear.
+1.  **Carregamento e Imputação:** Conversão de dados para formato numérico e tratamento de valores ausentes utilizando a estratégia de moda (valor mais frequente).
+2.  **Escalonamento:** Aplicação de `StandardScaler` para garantir que todas as variáveis estivessem na mesma escala, facilitando a convergência do modelo.
+3.  **Balanceamento com SMOTE:** > No dataset **German Credit Data**, o desbalanceamento entre clientes "bons" e "ruins" pode enviesar o modelo. Utilizamos o **SMOTE (Synthetic Minority Over-sampling Technique)** para criar novos exemplos sintéticos da classe minoritária através da interpolação. Isso garante que o modelo aprenda as características dos clientes de alto risco em vez de apenas memorizar a classe majoritária.
 
-### Resultados do Tratamento:
-Após a imputação, todos os valores ausentes foram preenchidos com os valores mais frequentes, e a normalização foi aplicada a ambas as variáveis de treino e teste.
 
-## 2. Validação Cruzada
 
-### O que foi feito:
+4.  **Validação Cruzada:** Implementação de 5-fold CV para validar a capacidade de generalização e reduzir o risco de overfitting.
+5.  **Otimização de Hiperparâmetros:** Uso de `GridSearchCV` para encontrar a configuração ideal de profundidade e número de árvores.
 
-Foi implementada uma **validação cruzada com 5 folds** para avaliar o desempenho do modelo e verificar sua robustez em diferentes subconjuntos dos dados.
+---
 
-- A métrica utilizada para validação foi o **RMSE** (Root Mean Squared Error).
-- O RMSE médio foi calculado, bem como o desvio padrão, para entender a variabilidade do modelo em diferentes splits de dados.
+## 📈 Resultados Finais
 
-### Resultado:
-O RMSE médio foi calculado com base nos 5 folds, dando uma visão geral de como o modelo se comporta com diferentes conjuntos de dados.
+Após o ajuste fino, o modelo apresentou os seguintes indicadores de performance:
 
-## 3. Otimização de Hiperparâmetros
+### Métricas de Avaliação
+| Métrica | Valor |
+| :--- | :---: |
+| **Acurácia Média (CV)** | 0.7911 |
+| **Precisão** | 0.7909 |
+| **Recall** | 0.7699 |
+| **F1-Score** | 0.7803 |
 
-### O que foi feito:
+### Melhores Hiperparâmetros Encontrados
+* `max_depth`: 10
+* `n_estimators`: 50
+* `max_features`: 'sqrt'
+* `min_samples_leaf`: 1
+* `min_samples_split`: 2
 
-A otimização dos hiperparâmetros foi realizada utilizando o **GridSearchCV**. Isso permite buscar os melhores valores para os parâmetros do modelo e otimizar o desempenho.
-
-- Para este projeto, otimizamos o modelo de **RandomForestRegressor**, alterando os parâmetros como:
-  - `n_estimators`: Número de árvores
-  - `max_depth`: Profundidade máxima das árvores
-  - `min_samples_split`: Mínimo número de amostras para dividir um nó
-  - `min_samples_leaf`: Mínimo número de amostras para ser folha
-  
-**Resultado**:
-Os melhores hiperparâmetros encontrados foram exibidos para garantir que o modelo esteja configurado para o melhor desempenho possível.
-
-## 4. Avaliação dos Resultados
-
-### O que foi feito:
-
-Foram calculadas diversas métricas para avaliar o modelo de regressão linear, incluindo:
-- **MAE (Mean Absolute Error)**: Mede a média das diferenças absolutas entre os valores previstos e os reais.
-- **MSE (Mean Squared Error)**: Mede a média dos quadrados das diferenças.
-- **RMSE (Root Mean Squared Error)**: A raiz quadrada do MSE, tornando a métrica mais interpretável em termos da mesma unidade de medida dos dados.
-- **R² (Coeficiente de Determinação)**: Mede a proporção da variabilidade dos dados que é explicada pelo modelo.
-
-### Resultado:
-As métricas finais, incluindo **MAE**, **MSE**, **RMSE** e **R²**, foram exibidas para avaliar a qualidade do modelo.
-
-## 5. Organização do Código
-
-O código foi estruturado de maneira modular, com funções específicas para:
-- Carregar e preparar os dados
-- Treinar e avaliar o modelo
-- Realizar validação cruzada
-- Otimizar os hiperparâmetros
-- Plotar os gráficos de resíduos
-
-Esse formato facilita a manutenção do código e o entendimento das etapas do projeto.
-
-## Como executar o projeto
-
-### Pré-requisitos:
-- Python 3.x
-- Bibliotecas necessárias:
-  - `pandas`
-  - `numpy`
-  - `sklearn`
-  - `matplotlib`
-
-### Passos para execução:
-1. Clone este repositório no seu computador:
-   ```bash
-   git clone https://github.com/jonathassdev/regressao-linear-projeto-credit-data.git
-
-2. Navegue até o diretório do projeto:
-    ```bash
-   cd regressao-linear-projeto-credit-data
-    ```
-3. Crie e ative um ambiente virtual:
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\activate  # Windows
-    source venv/bin/activate  # Linux/macOS
-    ```
-4. Instale as dependências:
-    ```bash
-    pip install -r requirements.txt
-    ```
-5. Execute o código:
-    ```bash
-    python main.py
-    ```
-
-### Observações:
-- O arquivo `german.data` deve estar presente no diretório correto.
-- Os resultados serão mostrados no terminal e o gráfico de resíduos será exibido.
-
-## Conclusão
-
-Este projeto demonstrou o uso de regressão linear, validação cruzada, otimização de hiperparâmetros e avaliação dos resultados. A implementação é flexível e pode ser adaptada para outros datasets de aprendizado supervisionado.
+### Análise de Resíduos
+Durante a execução, são gerados gráficos para validar a qualidade das previsões:
+* **Resíduos vs. Valores Reais:** Verifica se os erros são aleatórios (ideal) ou se seguem um padrão (indicando falha do modelo).
+* **Erro Absoluto:** Mede a magnitude média dos desvios em relação ao valor real.
